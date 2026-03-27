@@ -7,8 +7,6 @@
 
 > Une calculatrice scientifique professionnelle inspirée des calculatrices HP/TI haut de gamme. Design matériel premium avec écran LCD, touches ergonomiques et fonctionnalités scientifiques complètes.
 
-![Preview](./preview.png)
-
 ## ✨ Fonctionnalités
 
 ### Opérations de Base
@@ -146,10 +144,15 @@ Le parser mathématique gère correctement :
 
 ```
 calculatrice/
-├── index.html      # Application complète (HTML + CSS + JS)
-├── SPEC.md         # Spécification technique détaillée
-├── LICENSE         # Licence MIT
-└── README.md       # Ce fichier
+├── index.html         # Page principale
+├── css/
+│   └── style.css     # Styles de la calculatrice
+├── js/
+│   └── calculator.js # Logique applicative
+├── assets/           # Ressources (images, icônes)
+├── SPEC.md           # Spécification technique détaillée
+├── LICENSE           # Licence MIT
+└── README.md         # Ce fichier
 ```
 
 ## 🛠️ Technologies

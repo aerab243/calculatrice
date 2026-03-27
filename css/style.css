@@ -1,0 +1,423 @@
+/* ============================================
+   ScientifIC Pro - Styles
+   ============================================ */
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primary: #1a1a2e;
+    --secondary: #16213e;
+    --accent: #e94560;
+    --accent-dark: #b8344d;
+    --lcd-bg: #c5c6a6;
+    --lcd-text: #1a2820;
+    --lcd-shadow: #9a9b86;
+    --btn-num: #2d2d44;
+    --btn-num-hover: #3d3d54;
+    --btn-ops: #e94560;
+    --btn-ops-hover: #ff5a75;
+    --btn-sci: #0f3460;
+    --btn-sci-hover: #1a4a80;
+    --btn-mode: #1e5f4a;
+    --btn-mode-hover: #2a7d62;
+    --text-light: #eaeaea;
+    --text-dim: #8888aa;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --glow: rgba(233, 69, 96, 0.3);
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: linear-gradient(145deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+.calculator {
+    background: linear-gradient(170deg, #2a2a40 0%, #1a1a2e 30%, #16162a 100%);
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+    max-width: 420px;
+    width: 100%;
+    position: relative;
+}
+
+.calculator::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    border-radius: 2px;
+}
+
+.brand {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-light);
+    text-align: center;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+}
+
+.display-container {
+    background: var(--secondary);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 
+        inset 0 2px 8px rgba(0, 0, 0, 0.4),
+        0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.mode-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.mode-indicator {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    background: var(--primary);
+    color: var(--text-dim);
+    transition: all 0.2s ease;
+}
+
+.mode-indicator.active {
+    background: var(--btn-mode);
+    color: var(--text-light);
+    box-shadow: 0 0 10px rgba(30, 95, 74, 0.5);
+}
+
+.display {
+    background: var(--lcd-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 100px;
+    position: relative;
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 -1px 2px rgba(255, 255, 255, 0.3),
+        0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.display-label {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--lcd-shadow);
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+}
+
+.display-expression {
+    font-family: 'VT323', monospace;
+    font-size: 1.4rem;
+    color: var(--lcd-text);
+    word-break: break-all;
+    line-height: 1.3;
+    min-height: 1.8rem;
+}
+
+.display-result {
+    font-family: 'VT323', monospace;
+    font-size: 2.2rem;
+    color: var(--lcd-text);
+    text-align: right;
+    margin-top: 0.5rem;
+    text-shadow: 1px 1px 0 var(--lcd-shadow);
+    animation: resultAppear 0.15s ease-out;
+}
+
+@keyframes resultAppear {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.display.error .display-result {
+    color: var(--accent);
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.keyboard {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.btn-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.5rem;
+}
+
+.btn {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.75rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.btn-num {
+    background: var(--btn-num);
+    color: var(--text-light);
+    box-shadow: 
+        0 4px 0 #1a1a2a,
+        0 6px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-num:hover {
+    background: var(--btn-num-hover);
+}
+
+.btn-num:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 2px 0 #1a1a2a,
+        0 3px 5px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-ops {
+    background: var(--btn-ops);
+    color: var(--text-light);
+    box-shadow: 
+        0 4px 0 var(--accent-dark),
+        0 6px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-ops:hover {
+    background: var(--btn-ops-hover);
+}
+
+.btn-ops:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 2px 0 var(--accent-dark),
+        0 3px 5px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-sci {
+    background: var(--btn-sci);
+    color: var(--text-light);
+    box-shadow: 
+        0 4px 0 #0a2040,
+        0 6px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-size: 0.8rem;
+}
+
+.btn-sci:hover {
+    background: var(--btn-sci-hover);
+}
+
+.btn-sci:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 2px 0 #0a2040,
+        0 3px 5px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-mode {
+    background: var(--btn-mode);
+    color: var(--text-light);
+    box-shadow: 
+        0 4px 0 #145040,
+        0 6px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    font-size: 0.7rem;
+}
+
+.btn-mode:hover {
+    background: var(--btn-mode-hover);
+}
+
+.btn-mode:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 2px 0 #145040,
+        0 3px 5px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-mode.active {
+    background: #2a9d72;
+    box-shadow: 
+        0 4px 0 #1a7d52,
+        0 0 15px rgba(42, 157, 114, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-wide {
+    grid-column: span 2;
+}
+
+.btn-equals {
+    background: linear-gradient(170deg, var(--accent) 0%, var(--accent-dark) 100%);
+    box-shadow: 
+        0 4px 0 #8a2a3a,
+        0 6px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 0 20px rgba(233, 69, 96, 0.3);
+}
+
+.btn-equals:hover {
+    background: linear-gradient(170deg, #ff5a75 0%, var(--accent) 100%);
+}
+
+.btn-equals:active {
+    transform: translateY(2px);
+    box-shadow: 
+        0 2px 0 #8a2a3a,
+        0 3px 5px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.sci-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.sci-row .btn {
+    font-size: 0.7rem;
+    padding: 0.6rem 0.3rem;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+}
+
+@media (max-width: 500px) {
+    .calculator {
+        padding: 1rem;
+        border-radius: 16px;
+    }
+
+    .brand {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.65rem 0.4rem;
+        font-size: 0.85rem;
+        border-radius: 6px;
+    }
+
+    .btn-sci, .sci-row .btn {
+        font-size: 0.65rem;
+        padding: 0.5rem 0.2rem;
+    }
+
+    .display-result {
+        font-size: 1.8rem;
+    }
+
+    .display-expression {
+        font-size: 1.2rem;
+    }
+
+    .sci-row {
+        gap: 0.3rem;
+    }
+
+    .btn-row {
+        gap: 0.4rem;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 380px) {
+    .btn-row {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .sci-row {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .btn-wide {
+        grid-column: span 1;
+    }
+}
